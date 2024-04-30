@@ -1,8 +1,8 @@
 package entity
 
-type TrainingExerciceInterface interface{
-	Create(execice *TrainingExerciceEntity) (TrainingExerciceEntity, error)
+type ExerciceTraining interface {
+	Create(exercise *TrainingExerciceEntity) (TrainingExerciceEntity, error)
 	FindAll(page, limit int, sort string) ([]*TrainingExerciceEntity, error)
-	FindByTrainingExerciceID(id string) (*TrainingExerciceEntity, error)
+	FindByID(id string) (*TrainingExerciceEntity, error)
 	Delete(id string) (string, error)
 }

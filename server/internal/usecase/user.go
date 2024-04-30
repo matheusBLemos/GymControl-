@@ -27,7 +27,7 @@ func (a *UserUseCase) CreateNewUser(input dto.UserDTO) (dto.UserDTO, error) {
 		Gender:     input.Gender,
 		AcountType: input.AcountType,
 	}
-	if _, err := a.UserInterface.CreateUser(&User); err != nil {
+	if _, err := a.UserInterface.Create(&User); err != nil {
 		return dto.UserDTO{}, err
 	}
 	dto := dto.UserDTO{
@@ -44,7 +44,7 @@ func (a *UserUseCase) CreateNewUser(input dto.UserDTO) (dto.UserDTO, error) {
 }
 
 func (a *UserUseCase) FindAllUsers(page, limit int, sort string) ([]dto.UserDTO, error) {
-	entities, err := a.UserInterface.FindAllUsers(page, limit, sort)
+	entities, err := a.UserInterface.FindAll(page, limit, sort)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ func (a *UserUseCase) FindAllUsers(page, limit int, sort string) ([]dto.UserDTO,
 }
 
 func (a *UserUseCase) FindUserByID(id string) (dto.UserDTO, error) {
-	entity, err := a.UserInterface.FindUserByID(id)
+	entity, err := a.UserInterface.FindByID(id)
 	if err != nil {
 		return dto.UserDTO{}, err
 	}

@@ -1,8 +1,9 @@
 package entity
 
 type UserInterface interface {
-	CreateUser(user *UserEntity) (UserEntity, error)
-	FindAllUsers(page, limit int, sort string) ([]*UserEntity, error)
-	FindUserByID(id string) (*UserEntity, error)
+	Create(user *UserEntity) (UserEntity, error)
+	FindAll(page, limit int, sort string) ([]*UserEntity, error)
+	FindByID(id string) (*UserEntity, error)
+	Update(user *UserEntity) (UserEntity, error)
 	Delete(id string) (string, error)
 }
