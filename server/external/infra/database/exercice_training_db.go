@@ -17,7 +17,7 @@ func NewExerciceTrainingRepository(db *sql.DB) *ExerciceTrainingRepository {
 
 func (a *ExerciceTrainingRepository) Create(ExerciceTraining *entity.TrainingExerciceEntity) (*entity.TrainingExerciceEntity, error) {
 	id := uuid.New().String()
-	stmt, err := a.Db.Prepare("INSERT INTO ExerciceTraining (id, fk_exercice, fk_training, sets, reps, durations_seconds, total_durations_seconds, order) VALUES ($1, $2, $3, $4, $5, $6, $7)")
+	stmt, err := a.Db.Prepare("INSERT INTO exercice_training (id, fk_exercice, fk_training, sets, reps, durations_seconds, total_durations_seconds, order) VALUES ($1, $2, $3, $4, $5, $6, $7)")
 	if err != nil {
 		return nil, err
 	}
@@ -38,7 +38,7 @@ func (a *ExerciceTrainingRepository) Create(ExerciceTraining *entity.TrainingExe
 }
 
 func (a *ExerciceTrainingRepository) FindAll(page, limit int, sort string) ([]*entity.TrainingExerciceEntity, error) {
-	rows, err := a.Db.Query("SELECT id, fk_exercice, fk_training, sets, reps, durations_seconds, total_durations_seconds, order FROM ExerciceTraining")
+	rows, err := a.Db.Query("SELECT id, fk_exercice, fk_training, sets, reps, durations_seconds, total_durations_seconds, order FROM exercice_training")
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ func (a *ExerciceTrainingRepository) FindAll(page, limit int, sort string) ([]*e
 }
 
 func (a *ExerciceTrainingRepository) FindByID(id string) (*entity.TrainingExerciceEntity, error) {
-	rows, err := a.Db.Query("SELECT id, fk_exercice, fk_training, sets, reps, durations_seconds, total_durations_seconds, order FROM ExerciceTraining WHERE id = $1", id)
+	rows, err := a.Db.Query("SELECT id, fk_exercice, fk_training, sets, reps, durations_seconds, total_durations_seconds, order FROM exercice_training WHERE id = $1", id)
 	if err != nil {
 		return nil, err
 	}

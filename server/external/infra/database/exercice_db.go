@@ -17,7 +17,7 @@ func NewExerciceRepository(db *sql.DB) *ExerciceRepository {
 
 func (a *ExerciceRepository) Create(Exercice *entity.ExerciceEntity) (*entity.ExerciceEntity, error) {
 	id := uuid.New().String()
-	stmt, err := a.Db.Prepare("INSERT INTO Exercice (id, name, email, birthday, gender, acount_type) VALUES ($1, $2, $3, $4, $5)")
+	stmt, err := a.Db.Prepare("INSERT INTO exercice (id, name, desc, create_user, exercice_name) VALUES ($1, $2, $3, $4, $5)")
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ func (a *ExerciceRepository) Create(Exercice *entity.ExerciceEntity) (*entity.Ex
 }
 
 func (a *ExerciceRepository) FindAll(page, limit int, sort string) ([]*entity.ExerciceEntity, error) {
-	rows, err := a.Db.Query("SELECT id, name, email, birthday, gender, acount_type FROM Exercice")
+	rows, err := a.Db.Query("SELECT id, name, desc, create_user, exercice_name FROM exercice")
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ func (a *ExerciceRepository) FindAll(page, limit int, sort string) ([]*entity.Ex
 }
 
 func (a *ExerciceRepository) FindByID(id string) (*entity.ExerciceEntity, error) {
-	rows, err := a.Db.Query("SELECT id, name, email, birthday, gender, acount_type FROM user WHERE id = $1", id)
+	rows, err := a.Db.Query("SELECT id, name, desc, create_user, exercice_name FROM exercice WHERE id = $1", id)
 	if err != nil {
 		return nil, err
 	}
