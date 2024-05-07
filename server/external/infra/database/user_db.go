@@ -7,6 +7,8 @@ import (
 	"github.com/google/uuid"
 )
 
+var _ entity.UserInterface = (*UserRepository)(nil)
+
 type UserRepository struct {
 	Db *sql.DB
 }

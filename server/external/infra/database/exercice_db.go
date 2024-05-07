@@ -7,6 +7,8 @@ import (
 	"github.com/google/uuid"
 )
 
+var _ entity.ExerciceInterface = (*ExerciceRepository)(nil)
+
 type ExerciceRepository struct {
 	Db *sql.DB
 }
