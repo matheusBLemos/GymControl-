@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:alpine
+    container_name: gymControll-db
+    restart: always
+    tty: true
+    ports:
+      - "5433:5432"  # Change this line
+    volumes:
+      - ./../.db/postgres/data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: pgpass
+      POSTGRES_DB: permissao

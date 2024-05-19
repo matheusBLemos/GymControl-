@@ -17,7 +17,7 @@ func NewTrainingRepository(db *sql.DB) *TrainingRepository {
 
 func (a *TrainingRepository) Create(Training *entity.TrainingEntity) (*entity.TrainingEntity, error) {
 	id := uuid.New().String()
-	stmt, err := a.Db.Prepare("INSERT INTO Training (id, fk_user, fk_create_user, fk_training, desc) VALUES ($1, $2, $3, $4, $5, $6, $7)")
+	stmt, err := a.Db.Prepare("INSERT INTO training (id, fk_user, fk_create_user, fk_training, desc) VALUES ($1, $2, $3, $4, $5, $6, $7)")
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ func (a *TrainingRepository) Create(Training *entity.TrainingEntity) (*entity.Tr
 }
 
 func (a *TrainingRepository) FindAll(page, limit int, sort string) ([]*entity.TrainingEntity, error) {
-	rows, err := a.Db.Query("SELECT id, fk_user, fk_create_user, fk_training, desc FROM Training")
+	rows, err := a.Db.Query("SELECT id, fk_user, fk_create_user, fk_training, desc FROM training")
 	if err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ func (a *TrainingRepository) FindAll(page, limit int, sort string) ([]*entity.Tr
 }
 
 func (a *TrainingRepository) FindByID(id string) (*entity.TrainingEntity, error) {
-	rows, err := a.Db.Query("SELECT id, fk_user, fk_create_user, fk_training, desc FROM Training WHERE id = $1", id)
+	rows, err := a.Db.Query("SELECT id, fk_user, fk_create_user, fk_training, desc FROM training WHERE id = $1", id)
 	if err != nil {
 		return nil, err
 	}

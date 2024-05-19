@@ -7,26 +7,24 @@ import (
 )
 
 type WebServer struct {
-	App 		*fiber.App
-	Handlers      map[string]fiber.Handler
+	App           *fiber.App
+	Handlers      map[string]http.HandlerFunc
 	WebServerPort string
 }
 
 func NewWebServer(serverPort string) *WebServer {
 	return &WebServer{
-		App:        fiber.New(),
-		Handlers:      make(map[string]fiber.Handler),
+		App:           fiber.New(),
+		Handlers:      make(map[string]http.HandlerFunc),
 		WebServerPort: serverPort,
 	}
 }
 
-func (s *WebServer) AddHandler(path string, handler fiber.Handler) {
+func (s *WebServer) AddHandler(path string, handler http.HandlerFunc) {
 	s.Handlers[path] = handler
 }
 
 func (s *WebServer) Start() {
-	for path, handler := range s.Handlers {
-		s.App.Add(http.MethodGet, path, handler)
-	}
+	s.App.Handler()
 	s.App.Listen(s.WebServerPort)
 }

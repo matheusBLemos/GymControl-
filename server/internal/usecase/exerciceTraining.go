@@ -6,14 +6,14 @@ import (
 )
 
 type ExerciceTrainingUseCase struct {
-	ExerciceTrainingInterface entity.ExerciceTraining
+	TrainingExerciceInterface entity.TrainingExerciceInterface
 }
 
 func NewExerciceTraining(
-	ExerciceTrainingInterface entity.ExerciceTraining,
+	TrainingExerciceInterface entity.TrainingExerciceInterface,
 ) *ExerciceTrainingUseCase {
 	return &ExerciceTrainingUseCase{
-		ExerciceTrainingInterface: ExerciceTrainingInterface,
+		TrainingExerciceInterface: TrainingExerciceInterface,
 	}
 }
 
@@ -28,7 +28,7 @@ func (a *ExerciceTrainingUseCase) CreateNewExerciceTraining(input dto.TrainingEx
 		TotalDurationSeconds: input.TotalDurationSeconds,
 		Order:                input.Order,
 	}
-	if _, err := a.ExerciceTrainingInterface.Create(&ExerciceTraining); err != nil {
+	if _, err := a.TrainingExerciceInterface.Create(&ExerciceTraining); err != nil {
 		return dto.TrainingExerciceDto{}, err
 	}
 	dto := dto.TrainingExerciceDto{
@@ -46,7 +46,7 @@ func (a *ExerciceTrainingUseCase) CreateNewExerciceTraining(input dto.TrainingEx
 }
 
 func (a *ExerciceTrainingUseCase) FindAllExerciceTrainings(page, limit int, sort string) ([]dto.TrainingExerciceDto, error) {
-	entities, err := a.ExerciceTrainingInterface.FindAll(page, limit, sort)
+	entities, err := a.TrainingExerciceInterface.FindAll(page, limit, sort)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ func (a *ExerciceTrainingUseCase) FindAllExerciceTrainings(page, limit int, sort
 }
 
 func (a *ExerciceTrainingUseCase) FindExerciceTrainingByID(id string) (dto.TrainingExerciceDto, error) {
-	entity, err := a.ExerciceTrainingInterface.FindByID(id)
+	entity, err := a.TrainingExerciceInterface.FindByID(id)
 	if err != nil {
 		return dto.TrainingExerciceDto{}, err
 	}

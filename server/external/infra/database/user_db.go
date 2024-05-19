@@ -19,7 +19,7 @@ func NewUserRepository(db *sql.DB) *UserRepository {
 
 func (a *UserRepository) Create(User *entity.UserEntity) (*entity.UserEntity, error) {
 	id := uuid.New().String()
-	stmt, err := a.Db.Prepare("INSERT INTO User (id, name, password, email, birthday, gender, acount_type) VALUES ($1, $2, $3, $4, $5, $6, $7)")
+	stmt, err := a.Db.Prepare("INSERT INTO user (id, name, password, email, birthday, gender, acount_type) VALUES ($1, $2, $3, $4, $5, $6, $7)")
 	if err != nil {
 		return nil, err
 	}
