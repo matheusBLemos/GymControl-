@@ -22,7 +22,12 @@ func init() {
 }
 
 type config struct {
-	WebServerPort          string `mapstructure:"GYMCONTROL_WEBSERVER_PORT"`
+	WebServerPort string `mapstructure:"GYMCONTROL_WEBSERVER_PORT"`
+	DBServer      string `mapstructure:"GYMCONTROL_DB_SERVER"`
+	DBServerPort  string `mapstructure:"GYMCONTROL_DB_SERVERPORT"`
+	DBUser        string `mapstructure:"GYMCONTROL_DB_USER"`
+	DBPassword    string `mapstructure:"GYMCONTROL_DB_PASSWORD"`
+	DBDataBase    string `mapstructure:"GYMCONTROL_DB_DATABASE"`
 }
 
 func loadConfig(path string) (*config, error) {

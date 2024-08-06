@@ -2,21 +2,19 @@ package main
 
 import (
 	"GusLem/gymControll/configs"
-	"GusLem/gymControll/external/infra/webserver"
+	"GusLem/gymControll/infra/webserver"
 
+	"github.com/gofiber/fiber/v2"
 )
 var (
-	err error
+	trainigServer  *fiber.App
 )
 
 func init(){
-	
+	trainigServer = webserver.TrainingServer
 }
 
 func main(){
-	webserver := webserver.NewWebServer(":3000")
-	//webserver.AddHandler("/order", )
-	println("Starting web server on port", configs.Config.WebServerPort)
-	go webserver.Start()
+	trainigServer.Listen(configs.Config.WebServerPort)
 	select{}
 }

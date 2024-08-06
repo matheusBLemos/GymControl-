@@ -1,6 +1,7 @@
 package webserver
 
 import (
+	"GusLem/gymControll/cmd/dbinit"
 	"GusLem/gymControll/infra/database"
 	controllers "GusLem/gymControll/infra/webserver/controller"
 	"GusLem/gymControll/internal/usecase"
@@ -8,17 +9,14 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-var SDKServer *fiber.App
-var UserController *controllers.UserController
+var TrainingServer *fiber.App
+var userController *controllers.UserController
 
 func init() {
-	SDKServer = fiber.New()
-	userUseCase := &usecase.UserUseCase{UserInterface: &database.UserRepository{}}
-	apiController = &controllers.ApiController{
-		QueryUseCase:  *queryUseCase,
-		MethodUseCase: *methodUseCase,
-	}
+	TrainingServer = fiber.New()
+	userUseCase := &usecase.UserUseCase{UserInterface: &database.UserRepository{Db: dbinit.Dbinit}}
+	userController = &controllers.UserController{UserUseCase: *userUseCase}
 
-	SDKServer.Get("/request/:customer/:application/:messageTitle/:requestType", apiController.SendRequest)
-	SDKServer.Post("/send/method", apiController.SendMethod)
+	TrainingServer.Get("/users", userController.CreateUser)
+	TrainingServer.Post("/send/method", userController.CreateUser)
 }
