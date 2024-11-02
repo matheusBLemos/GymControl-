@@ -3,16 +3,18 @@ version: "3.9"
 services:
   db:
     image: postgres:alpine
-    container_name: gymControll-db
+    container_name: userMenagement-db
     restart: always
     tty: true
     ports:
-      - "5433:5432"  # Change this line
+      - "5433:5432"  # O host (5433) está mapeado para a porta do container (5432)
     volumes:
-      - ./../.db/postgres/data:/var/lib/postgresql/data
+      - ./../.db/postgres/data:/var/lib/postgresql/data  # O volume está configurado corretamente
     environment:
+      POSTGRES_ROOT_PASSWORD: root
       POSTGRES_USER: pguser
       POSTGRES_PASSWORD: pgpass
-      POSTGRES_DB: permissao
+      POSTGRES_DB: userMenagementDB
+
       
 

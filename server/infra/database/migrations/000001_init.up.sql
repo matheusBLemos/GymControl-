@@ -1,5 +1,4 @@
 CREATE TYPE gender_enum AS ENUM ('M', 'F');
-CREATE TYPE account_type_enum AS ENUM ('ALUNO', 'PERSONAL', 'NUTRICIONISTA', 'ACADEMIA');
 CREATE TYPE status_enum AS ENUM ('0', '1');
 
 CREATE TABLE users (
@@ -9,7 +8,15 @@ CREATE TABLE users (
     email VARCHAR(255),
     birthday TIMESTAMP,
     gender gender_enum,
-    account_type account_type_enum,
+    account_type TEXT,
+    status status_enum,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated TIMESTAMP
+);
+
+CREATE TABLE acess_controll (
+    id UUID PRIMARY KEY,
+    role_name VARCHAR(255),
     status status_enum,
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated TIMESTAMP
@@ -75,6 +82,11 @@ $$ language 'plpgsql';
 
 CREATE TRIGGER update_users_updated_at
 BEFORE UPDATE ON users
+FOR EACH ROW
+EXECUTE FUNCTION update_timestamp();
+
+CREATE TRIGGER update_acess_controll_updated_at
+BEFORE UPDATE ON acess_controll
 FOR EACH ROW
 EXECUTE FUNCTION update_timestamp();
 
