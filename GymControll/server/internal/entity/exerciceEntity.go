@@ -5,34 +5,22 @@ import "errors"
 type ExerciceEntity struct {
 	ID string
 	Name string
-	Password string
-	Email string
-	Birthday string
-	Gender string
-	AcountType string	
+	Muscle string
+	CreateUser string	
 }
 
 func (u *ExerciceEntity) IsValidExercice() error{
 	if u.ID == ""{
-		return errors.New("ID Obrigatorio")
+		return errors.New("ID is required")
 	}
 	if u.Name == ""{
-		return errors.New("Nome Obrigatorio")
+		return errors.New("Name is required")
 	}
-	if u.Password == ""{
-		return errors.New("Senha Obrigatorio")
+	if u.Muscle == ""{
+		return errors.New("Muscle is required")
 	}
-	if u.Email == ""{
+	if u.CreateUser == ""{
 		return errors.New("Email Obrigatorio")
-	}
-	if u.Birthday == ""{
-		return errors.New("DataNasc Obrigatorio")
-	}
-	if u.Gender == ""{
-		return errors.New("Genero Obrigatorio")
-	}
-	if u.AcountType == ""{
-		return errors.New("TipoConta Obrigatorio")
 	}
 	return nil
 }

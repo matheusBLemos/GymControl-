@@ -14,25 +14,25 @@ type UserEntity struct {
 
 func (u *UserEntity) IsValidUser() error{
 	if u.ID == ""{
-		return errors.New("ID Obrigatorio")
+		return errors.New("ID is required")
 	}
 	if u.Name == ""{
-		return errors.New("Nome Obrigatorio")
+		return errors.New("Name is required")
 	}
 	if u.Password == ""{
-		return errors.New("Senha Obrigatorio")
+		return errors.New("Password is required")
 	}
 	if u.Email == ""{
-		return errors.New("Email Obrigatorio")
+		return errors.New("Email is required")
 	}
 	if u.Birthday == ""{
-		return errors.New("DataNasc Obrigatorio")
+		return errors.New("Birthday is required")
 	}
 	if u.Gender == ""{
-		return errors.New("Genero Obrigatorio")
+		return errors.New("Gender is required")
 	}
 	if u.AcountType == ""{
-		return errors.New("TipoConta Obrigatorio")
+		return errors.New("Acount Type is required")
 	}
 	return nil
 }
