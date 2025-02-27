@@ -10,3 +10,4 @@ type UserInterface interface {
 	Update(user *UserEntity) (UserEntity, error)
 	Delete(id string) (string, error)
 }
+

@@ -3,7 +3,7 @@ package entity
 import "errors"
 
 type UserEntity struct {
-	ID string
+	Id string
 	Name string
 	Password string
 	Email string
@@ -13,7 +13,7 @@ type UserEntity struct {
 }
 
 func (u *UserEntity) IsValidUser() error{
-	if u.ID == ""{
+	if u.Id == ""{
 		return errors.New("ID is required")
 	}
 	if u.Name == ""{
