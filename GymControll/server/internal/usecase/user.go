@@ -8,12 +8,12 @@ import (
 )
 
 type UserUsecase struct {
-	UserInterface entity.UserInterface
+	UserInterface         entity.UserInterface
 	UserPersonalInterface entity.UserPersonalInterface
 }
 
 func (u *UserUsecase) CreateNewUser(input dto.CreateUserDto) (dto.UserDto, error) {
-	password, error := u.UserOperations.CryptoPassword(input.Password)
+	password, error := u.UserInterface.CryptoPassword(input.Password)
 	if error != nil {
 		return dto.UserDto{}, errors.New("Error to Encrypt Password")
 	}
@@ -25,10 +25,10 @@ func (u *UserUsecase) CreateNewUser(input dto.CreateUserDto) (dto.UserDto, error
 		Gender:     input.Gender,
 		AcountType: input.AcountType,
 	}
-	err := user.IsValidUser(){
+	if err := user.IsValidUser(); err != nil {
 		return dto.UserDto{}, err
 	}
-	if _, err := u.UserOperations.CreateUser(&user); err != nil {
+	if _, err := u.UserInterface.CreateUser(user); err != nil {
 		return dto.UserDto{}, errors.New("Error to create User")
 	}
 	return dto.UserDto{
