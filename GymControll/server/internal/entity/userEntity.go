@@ -2,7 +2,7 @@ package entity
 
 import "errors"
 
-type UserEntity struct {
+type User struct {
 	Id string
 	Name string
 	Password string
@@ -12,7 +12,7 @@ type UserEntity struct {
 	AcountType string	
 }
 
-func (u *UserEntity) IsValidUser() error{
+func (u *User) IsValidUser() error{
 	if u.Id == ""{
 		return errors.New("ID is required")
 	}

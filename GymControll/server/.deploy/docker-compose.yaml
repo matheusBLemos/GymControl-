@@ -1,0 +1,37 @@
+version: '3.8'
+
+networks:
+  server:
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    volumes:
+      - ./sql/migrations/000001_init.up.sql:/docker-entrypoint-initdb.d/000001_init.up.sql
+      - ./sql/migrations/000001_init.down.sql:/docker-entrypoint-initdb.d/000001_init.down.sql
+    environment:
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "root"
+    ports:
+      - "5432:5432"  # Porto interno do PostgreSQL
+    networks:
+      - server
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "root", "-d", "postgres"]
+      interval: 10s
+      retries: 5
+      timeout: 5s
+
+  web-server:
+    container_name: server
+    hostname: server
+    build:
+      context: .
+    image: cpfcheck:latest
+    ports:
+      - "5000:5000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - server

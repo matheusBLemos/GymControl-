@@ -1,10 +1,9 @@
 package entity
 
-import "errors"
 
 type ExerciceSerie struct {
-	serieNumber  int
-	numberAtReps int
+	SerieNumber  int8
+	NumberAtReps int8
 }
 
 type TrainingSessionExercicesToDo struct {
@@ -47,7 +46,7 @@ type CompletedTrainingSessionEntity struct {
 // 	return nil
 // }
 
-// func (u *TrainingSessionEntity) IsValidTrainingSessionEntity() error {
+// func (u *CompletedTrainingSessionEntity) IsValidTrainingSessionEntity() error {
 // 	if u.ID == "" {
 // 		return errors.New("ID is required")
 // 	}
