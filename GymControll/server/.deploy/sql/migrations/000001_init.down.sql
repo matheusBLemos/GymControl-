@@ -1,10 +1,16 @@
-DROP TABLE IF EXISTS cnpj;
-DROP TABLE IF EXISTS cpf;
-DROP DATABASE IF EXISTS validate;
+DROP TABLE IF EXISTS gym_controll_users;
 
-CREATE DATABASE validate;
+CREATE DATABASE gym_controll;
 
-\c validate;
+\c gym_controll;
+
+-- Cria o enum para o tipo de conta
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'account_type_enum') THEN
+        CREATE TYPE account_type_enum AS ENUM ('default_user', 'personal', 'nutritionist', 'gym_manager');
+    END IF;
+END$$;
 
 CREATE OR REPLACE FUNCTION trigger_set_timestamp()
 RETURNS TRIGGER AS $$
@@ -14,34 +20,15 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TABLE cpf (
-    id SERIAL PRIMARY KEY,
+CREATE TABLE gym_controll_users (
+    id VARCHAR(255) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    city VARCHAR(255),
-    state VARCHAR(255),
-    cpf_number VARCHAR(20) NOT NULL,
-    block_list INT,
+    password VARCHAR(255),
+    email VARCHAR(255),
+    birthday TIMESTAMPTZ,
+    gender INT,
+    account_type account_type_enum,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE TABLE cnpj (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    city VARCHAR(255),
-    state VARCHAR(255),
-    cnpj_number VARCHAR(255),
-    block_list INT,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-
-CREATE TRIGGER set_timestamp
-BEFORE UPDATE ON cpf
-FOR EACH ROW
-EXECUTE PROCEDURE trigger_set_timestamp();
-
-CREATE TRIGGER set_timestamp
-BEFORE UPDATE ON cnpj
-FOR EACH ROW
-EXECUTE PROCEDURE trigger_set_timestamp();
