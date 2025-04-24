@@ -8,7 +8,7 @@ CREATE DATABASE gym_controll_db;
 DO $$
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'account_type_enum') THEN
-        CREATE TYPE account_type_enum AS ENUM ('default_user', 'personal', 'nutritionist', 'gym_manager');
+        CREATE TYPE account_type_enum AS ENUM ('default_user', 'personal', 'nutritionist', 'coach', 'gym_manager');
     END IF;
 END$$;
 
@@ -26,7 +26,7 @@ CREATE TABLE gym_controll_users (
     password VARCHAR(255),
     email VARCHAR(255),
     birthday TIMESTAMPTZ,
-    gender INT,
+    gender VARCHAR(55),
     account_type account_type_enum,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()

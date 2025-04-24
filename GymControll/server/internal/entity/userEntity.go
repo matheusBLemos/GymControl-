@@ -13,7 +13,7 @@ type User struct {
 }
 
 func (u *User) IsValidUser() error{
-	if u.AcountType != "defaut" || u.AcountType != "personal" || u.AcountType != "nutrucionist" || u.AcountType != "coach" || u.AcountType != "gym_menager" {
+	if u.AcountType != "defaut" || u.AcountType != "personal" || u.AcountType != "nutritionist" || u.AcountType != "coach" || u.AcountType != "gym_manager" {
 		return errors.New("Acount Type is not acept")
 	}
 	if u.Id == ""{

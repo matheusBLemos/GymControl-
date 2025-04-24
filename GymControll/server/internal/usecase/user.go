@@ -28,7 +28,7 @@ func (u *UserUsecase) CreateNewUser(input dto.CreateUserDto) (dto.UserDto, error
 	if err := user.IsValidUser(); err != nil {
 		return dto.UserDto{}, err
 	}
-	if _, err := u.UserInterface.CreateUser(user); err != nil {
+	if _, err := u.UserInterface.Create(user); err != nil {
 		return dto.UserDto{}, errors.New("Error to create User")
 	}
 	return dto.UserDto{

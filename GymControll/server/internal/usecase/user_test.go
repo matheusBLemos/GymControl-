@@ -32,7 +32,7 @@ func (m *mockUserInterface) CryptoPassword(password string) (string, error) {
 	return "hashedpassword", nil
 }
 
-func (m *mockUserInterface) CreateUser(user *entity.User) (*entity.User, error) {
+func (m *mockUserInterface) Create(user *entity.User) (*entity.User, error) {
 	return user, nil
 }
 func (m *mockUserInterface) FindAll(page, limit int, sort string) ([]*entity.User, error) {
