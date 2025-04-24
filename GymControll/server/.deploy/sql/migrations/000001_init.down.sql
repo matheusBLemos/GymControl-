@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS gym_controll_users;
 
-CREATE DATABASE gym_controll;
+CREATE DATABASE gym_controll_db;
 
-\c gym_controll;
+\c gym_controll_db;
 
 -- Cria o enum para o tipo de conta
 DO $$

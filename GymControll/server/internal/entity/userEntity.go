@@ -13,6 +13,9 @@ type User struct {
 }
 
 func (u *User) IsValidUser() error{
+	if u.AcountType != "defaut" || u.AcountType != "personal" || u.AcountType != "nutrucionist" || u.AcountType != "coach" || u.AcountType != "gym_menager" {
+		return errors.New("Acount Type is not acept")
+	}
 	if u.Id == ""{
 		return errors.New("ID is required")
 	}

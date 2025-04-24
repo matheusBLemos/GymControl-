@@ -33,9 +33,9 @@ services:
         gym_controll_db_port: 5432 
         gym_controll_db_user: root
         gym_controll_db_pass: root
-        gym_controll_db_name: gym_control_db
+        gym_controll_db_name: gym_controll_db
         gym_controll_web_server_port: 5000
-    image: cpfcheck:latest
+    image: gym_controll:latest
     ports:
       - "5000:5000"
     depends_on:
