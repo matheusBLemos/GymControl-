@@ -1,0 +1,44 @@
+version: "3.8"
+
+networks:
+  server:
+
+services:
+  gym_controll_postgres-db:
+    image: postgres:17-alpine
+    volumes:
+      - ./sql/migrations/000001_init.up.sql:/docker-entrypoint-initdb.d/000001_init.up.sql
+      - ./sql/migrations/000001_init.down.sql:/docker-entrypoint-initdb.d/000001_init.down.sql
+    environment:
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "root"
+    ports:
+      - "5432:5432" # Porto interno do PostgreSQL
+    networks:
+      - server
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "root", "-d", "postgres"]
+      interval: 10s
+      retries: 5
+      timeout: 5s
+
+  gym_controll_web-server:
+    container_name: gym_controll
+    hostname: gym_controll_server
+    build:
+      context: .
+      args:
+        gym_controll_db_drive: 
+        gym_controll_db_host: 
+        gym_controll_db_port: 
+        gym_controll_db_user:
+        gym_controll_db_pass:
+        gym_controll_web_server_port:
+    image: cpfcheck:latest
+    ports:
+      - "5000:5000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - server

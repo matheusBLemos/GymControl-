@@ -35,17 +35,13 @@ type config struct {
 
 func loadConfig() (*config, error) {
 	cfg := &config{
-		DBDriver:       os.Getenv("SPEX_DBDRIVER"),
-		DBHost:         os.Getenv("SPEX_DBHOST"),
-		DBPort:         os.Getenv("SPEX_DBPORT"),
-		DBUser:         os.Getenv("SPEX_DBUSER"),
-		DBPassword:     os.Getenv("SPEX_DBPASS"),
-		DBName:         os.Getenv("SPEX_DBNAME"),
-		WebServerPort:  os.Getenv("SPEX_WEBSERVER_PORT"),
-		GRPCServerPort: os.Getenv("SPEX_GRPCSERVER_PORT"),
-		MQServerHost:   os.Getenv("SPEX_MQSERVER_HOST"),
-		MQUser:         os.Getenv("SPEX_MQUSER"),
-		MQPassword:     os.Getenv("SPEX_MQPASSWORD"),
+		DBDriver:       os.Getenv("GymControll_DBDRIVER"),
+		DBHost:         os.Getenv("GymControll_DBHOST"),
+		DBPort:         os.Getenv("GymControll_DBPORT"),
+		DBUser:         os.Getenv("GymControll_DBUSER"),
+		DBPassword:     os.Getenv("GymControll_DBPASS"),
+		DBName:         os.Getenv("GymControll_DBNAME"),
+		WebServerPort:  os.Getenv("GymControll_WEBSERVER_PORT"),
 	}
 
 	applications := os.Getenv("SPEX_APPLICATIONS")
