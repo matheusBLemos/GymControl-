@@ -28,6 +28,7 @@ CREATE TABLE gym_controll_users (
     birthday TIMESTAMPTZ,
     gender VARCHAR(55),
     account_type account_type_enum,
+    activate INT DEFAULT 0,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );

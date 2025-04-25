@@ -11,4 +11,17 @@ Content-Type: application/json
 }
 ###
 
-DELETE http://localhost:8000/products/a28756d6-8c4a-4935-84f3-936ef6afd688 HTTP/1.1
+GET http://localhost:5000/gymcontoll/api/v1/users
+
+###
+GET http://localhost:5000/gymcontoll/api/v1/user/55aa3dfd-a0ca-4b3b-90bf-fa6befb807dc
+
+###
+PUT http://localhost:5000/gymcontoll/api/v1/user/55aa3dfd-a0ca-4b3b-90bf-fa6befb807dc
+Content-Type: application/json
+
+{
+  "acountype": "default_user"
+}
+###
+PUT  http://localhost:5000/gymcontoll/api/v1/deleteuser/55aa3dfd-a0ca-4b3b-90bf-fa6befb807dc

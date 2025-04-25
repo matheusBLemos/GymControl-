@@ -35,6 +35,10 @@ func (s *Server) Start(port string) error {
 
 	//USERS
 	gymcontollrouter.Post("/user", apiRouter.CreateUserHandler)
+	gymcontollrouter.Get("/users", apiRouter.FindAllUsersHandler)
+	gymcontollrouter.Get("/user/:id", apiRouter.FindUserByIdHandler)
+	gymcontollrouter.Put("/user/:id", apiRouter.UpdateUserHandler)
+	gymcontollrouter.Put("/deleteuser/:id", apiRouter.DeleteUserHandler)
 
 	return app.Listen(port)
 }
