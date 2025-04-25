@@ -29,11 +29,11 @@ func (u *UserRepository) Create(user *entity.User) (*entity.User, error) {
 	if err := user.IsValidUser(); err != nil {
 		return nil, err
 	}
-	stmt, err := u.Db.Prepare("INSERT INTO gym_controll_users (name, password, email, birthday, gender, account_type) VALUES ($1, $2, $3, $4)")
+	stmt, err := u.Db.Prepare("INSERT INTO gym_controll_users (id, name, password, email, birthday, gender, account_type) VALUES ($1, $2, $3, $4, $5, $6, $7)")
 	if err != nil {
 		return nil, err
 	}
-	_, err = stmt.Exec(user.Id, user.Name, user.Password, user.Email, user.Gender, user.AcountType)
+	_, err = stmt.Exec(user.Id, user.Name, user.Password, user.Email, user.Birthday, user.Gender, user.AcountType)
 	if err != nil {
 		return nil, err
 	}

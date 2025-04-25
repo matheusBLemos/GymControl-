@@ -2,6 +2,7 @@ package usecase
 
 import (
 	"errors"
+	"fmt"
 
 	"github.com/mathgod152/GymControl/internal/dto"
 	"github.com/mathgod152/GymControl/internal/entity"
@@ -29,7 +30,7 @@ func (u *UserUsecase) CreateNewUser(input dto.CreateUserDto) (dto.UserDto, error
 		return dto.UserDto{}, err
 	}
 	if _, err := u.UserInterface.Create(user); err != nil {
-		return dto.UserDto{}, errors.New("Error to create User")
+		return dto.UserDto{}, errors.New(fmt.Sprintf(" Error to create User", err))
 	}
 	return dto.UserDto{
 		Name:       input.Name,

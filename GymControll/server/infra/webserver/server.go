@@ -34,7 +34,7 @@ func (s *Server) Start(port string) error {
 
 
 	//USERS
-	gymcontollrouter.Post("gymcontoll/user", apiRouter.CreateUserHandler)
+	gymcontollrouter.Post("/user", apiRouter.CreateUserHandler)
 
 	return app.Listen(port)
 }

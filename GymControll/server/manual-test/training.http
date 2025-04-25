@@ -1,15 +1,14 @@
-GET http://localhost:8000/products/a28756d6-8c4a-4935-84f3-936ef6afd688 HTTP/1.1
-
-###
-
-PUT http://localhost:8000/products/a28756d6-8c4a-4935-84f3-936ef6afd688 HTTP/1.1
+POST http://localhost:5000/gymcontoll/api/v1/user HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "My Product Updated",
-  "price": 200
+  "name": "Matheus Lemos Usuario",
+  "password": "1234",
+  "email": "matheus2002hbl@hotmail.com",
+  "birthday": "1972-01-19T16:00:00Z",
+  "gender": "M",
+  "acountype": "gym_manager"
 }
-
 ###
 
 DELETE http://localhost:8000/products/a28756d6-8c4a-4935-84f3-936ef6afd688 HTTP/1.1

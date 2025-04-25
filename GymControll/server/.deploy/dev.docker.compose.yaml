@@ -26,20 +26,21 @@ services:
     container_name: gym_controll
     hostname: gym_controll_server
     build:
-      context: .
+      context: ../
+      dockerfile: Dockerfile
       args:
         gym_controll_db_drive: postgres
-        gym_controll_db_host: localhost
+        gym_controll_db_host: gym_controll_postgres-db
         gym_controll_db_port: 5432 
         gym_controll_db_user: root
         gym_controll_db_pass: root
         gym_controll_db_name: gym_controll_db
-        gym_controll_web_server_port: 5000
-    image: gym_controll:latest
+        gym_controll_web_server_port: 5000 
+    image: gymcontroll:latest
     ports:
       - "5000:5000"
     depends_on:
-      postgres:
+      gym_controll_postgres-db:
         condition: service_healthy
     networks:
       - server

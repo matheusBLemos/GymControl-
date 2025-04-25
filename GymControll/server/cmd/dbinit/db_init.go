@@ -22,7 +22,7 @@ func init() {
 	password := configs.Config.DBPassword
 	dbname := configs.Config.DBName
 
-	ConnectionString := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", server, port, user, password, dbname)
+	ConnectionString := fmt.Sprintf("host=%v port=%v user=%v password=%v dbname=%v sslmode=disable", server, port, user, password, dbname)
 	fmt.Println("Connecting with:", ConnectionString)
 
 	for retries := 0; retries < 10; retries++ {
