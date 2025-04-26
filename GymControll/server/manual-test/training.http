@@ -11,6 +11,15 @@ Content-Type: application/json
 }
 ###
 
+POST http://localhost:5000/gymcontoll/api/v1/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "matheus2002hbl@hotmail.com",
+  "password": "1234"
+}
+###
+
 GET http://localhost:5000/gymcontoll/api/v1/users
 
 ###
@@ -21,7 +30,20 @@ PUT http://localhost:5000/gymcontoll/api/v1/user/55aa3dfd-a0ca-4b3b-90bf-fa6befb
 Content-Type: application/json
 
 {
+  "name": "Matheus Atualizado",
+  "password": "novaSenha123",
+  "email": "matheus_atualizado@hotmail.com",
+  "birthday": "1990-02-10T00:00:00Z",
+  "gender": "M",
   "acountype": "default_user"
 }
+###
+PUT http://localhost:5000/gymcontoll/api/v1/user/55aa3dfd-a0ca-4b3b-90bf-fa6befb807dc
+Content-Type: application/json
+
+{
+  "acountype": "default_user"
+}
+
 ###
 PUT  http://localhost:5000/gymcontoll/api/v1/deleteuser/55aa3dfd-a0ca-4b3b-90bf-fa6befb807dc

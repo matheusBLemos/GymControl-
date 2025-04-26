@@ -7,6 +7,7 @@ import (
 
 	"github.com/mathgod152/GymControl/cmd/dbinit"
 	"github.com/mathgod152/GymControl/infra/database"
+	"github.com/mathgod152/GymControl/infra/implementations"
 	"github.com/mathgod152/GymControl/infra/webserver"
 	"github.com/mathgod152/GymControl/internal/entity"
 	"github.com/mathgod152/GymControl/internal/usecase"
@@ -14,24 +15,28 @@ import (
 
 var (
 	serverImpl entity.Server
-	DB *sql.DB
-	err error
+	DB         *sql.DB
+	err        error
 )
 
-func init(){
-	var(
-		UserImplementation = &database.UserRepository{ Db: dbinit.DB}
+func init() {
+	var (
+		UserImplementation  = &database.UserRepository{Db: dbinit.DB}
+		LoginImplementation = &implementations.LoginImplementations{Db: dbinit.DB}
 
-		runUserValidator = &usecase.UserUsecase{
-			UserInterface: UserImplementation, // Injetando a implementação 
+		runUserImplementation = &usecase.UserUsecase{
+			UserInterface: UserImplementation, 
+		}
+		runLoginImplementation = &usecase.UserInteractorUsecase{
+			UserInteractor: LoginImplementation,
 		}
 	)
 
 	serverImpl = &webserver.Server{
-		User: runUserValidator,
+		User: runUserImplementation,
+		Login: runLoginImplementation,
 	}
 }
-
 
 func main() {
 	go serverImpl.Start(":5000")

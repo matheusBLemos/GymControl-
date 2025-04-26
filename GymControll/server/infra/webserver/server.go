@@ -13,11 +13,13 @@ var _ entity.Server = (*Server)(nil)
 
 type Server struct {
 	User *usecase.UserUsecase
+	Login *usecase.UserInteractorUsecase
 }
 
 func (s *Server) Start(port string) error {
 	apiRouter := &handlers.Router{
 		User: s.User,
+		Login: s.Login,
 	}
 
 	app := fiber.New()
@@ -39,6 +41,9 @@ func (s *Server) Start(port string) error {
 	gymcontollrouter.Get("/user/:id", apiRouter.FindUserByIdHandler)
 	gymcontollrouter.Put("/user/:id", apiRouter.UpdateUserHandler)
 	gymcontollrouter.Put("/deleteuser/:id", apiRouter.DeleteUserHandler)
+
+	//Login
+	gymcontollrouter.Post("/login", apiRouter.LoginHandler)
 
 	return app.Listen(port)
 }

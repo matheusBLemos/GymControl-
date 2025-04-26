@@ -82,10 +82,10 @@ func (u *UserRepository) FindByID(id string) (*entity.User, error) {
 	row := u.Db.QueryRow(query, id)
 
 	var user entity.User
-	err := row.Scan(&user.Id, &user.Name, &user.Password, &user.Email, &user.Birthday, &user.Gender, &user.AcountType)
+	err := row.Scan(&user.Id, &user.Name, &user.Email, &user.Birthday, &user.Gender, &user.AcountType)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, nil // ou erro customizado se preferir
+			return nil, nil 
 		}
 		return nil, err
 	}
@@ -137,7 +137,7 @@ func (u *UserRepository) Update(user *entity.User) (*entity.User, error) {
 		return nil, errors.New("nenhum campo fornecido para atualizar")
 	}
 
-	query = query[:len(query)-2] // Remove a vírgula final
+	query = query[:len(query)-2] 
 	query += " WHERE id = $" + strconv.Itoa(i)
 	args = append(args, user.Id)
 

@@ -36,6 +36,7 @@ services:
         gym_controll_db_pass: root
         gym_controll_db_name: gym_controll_db
         gym_controll_web_server_port: 5000 
+        gym_controll_passsecret: dev_secret
     image: gymcontroll:latest
     ports:
       - "5000:5000"

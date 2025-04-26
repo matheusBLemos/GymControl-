@@ -10,7 +10,6 @@ type UserInterface interface {
 }
 
 
-
 type UserPersonalInterface interface {
 	Relationate(userEmail, personalEmail string) (*User, error)
 	FindUserByTrainer(personalId string) ([]*User, error)

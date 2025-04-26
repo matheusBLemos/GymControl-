@@ -3,7 +3,6 @@ package configs
 import (
 	"errors"
 	"os"
-	"strings"
 )
 
 var (
@@ -19,34 +18,26 @@ func init() {
 }
 
 type config struct {
-	DBDriver         string
-	DBHost           string
-	DBPort           string
-	DBUser           string
-	DBPassword       string
-	DBName           string
-	WebServerPort    string
-	GRPCServerPort   string
-	MQServerHost     string
-	MQUser           string
-	MQPassword       string
-	SPEXApplications []string
+	DBDriver      string
+	DBHost        string
+	DBPort        string
+	DBUser        string
+	DBPassword    string
+	DBName        string
+	WebServerPort string
+	PassSecret    string
 }
 
 func loadConfig() (*config, error) {
 	cfg := &config{
-		DBDriver:       os.Getenv("GymControll_DBDRIVER"),
-		DBHost:         os.Getenv("GymControll_DBHOST"),
-		DBPort:         os.Getenv("GymControll_DBPORT"),
-		DBUser:         os.Getenv("GymControll_DBUSER"),
-		DBPassword:     os.Getenv("GymControll_DBPASS"),
-		DBName:         os.Getenv("GymControll_DBNAME"),
-		WebServerPort:  os.Getenv("GymControll_WEBSERVER_PORT"),
-	}
-
-	applications := os.Getenv("SPEX_APPLICATIONS")
-	if applications != "" {
-		cfg.SPEXApplications = strings.Split(applications, ",")
+		DBDriver:      os.Getenv("GymControll_DBDRIVER"),
+		DBHost:        os.Getenv("GymControll_DBHOST"),
+		DBPort:        os.Getenv("GymControll_DBPORT"),
+		DBUser:        os.Getenv("GymControll_DBUSER"),
+		DBPassword:    os.Getenv("GymControll_DBPASS"),
+		DBName:        os.Getenv("GymControll_DBNAME"),
+		WebServerPort: os.Getenv("GymControll_WEBSERVER_PORT"),
+		PassSecret:    os.Getenv("GymControll_PassSecret"),
 	}
 
 	if cfg.DBDriver == "" || cfg.DBHost == "" || cfg.DBUser == "" || cfg.DBPassword == "" || cfg.DBName == "" {
