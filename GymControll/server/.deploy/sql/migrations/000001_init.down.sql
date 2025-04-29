@@ -33,3 +33,13 @@ CREATE TABLE gym_controll_users (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+CREATE TABLE gym_controll_exercices (
+    id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    muscle VARCHAR(255) NOT NULL,
+    activate INT DEFAULT 0,
+    created_user VARCHAR(255),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    CONSTRAINT fk_created_user FOREIGN KEY (created_user) REFERENCES gym_controll_users(id)
+);

@@ -23,6 +23,7 @@ func init() {
 	var (
 		UserImplementation  = &database.UserRepository{Db: dbinit.DB}
 		LoginImplementation = &implementations.LoginImplementations{Db: dbinit.DB}
+		ExerciceImplementation = &database.ExerciceRepository{Db: dbinit.DB}
 
 		runUserImplementation = &usecase.UserUsecase{
 			UserInterface: UserImplementation, 
@@ -30,11 +31,15 @@ func init() {
 		runLoginImplementation = &usecase.UserInteractorUsecase{
 			UserInteractor: LoginImplementation,
 		}
+		runExerciceImplementation = &usecase.ExerciceUsecase{
+			ExerciceInterface: ExerciceImplementation,
+		}
 	)
 
 	serverImpl = &webserver.Server{
 		User: runUserImplementation,
 		Login: runLoginImplementation,
+		Exercice: runExerciceImplementation,
 	}
 }
 
