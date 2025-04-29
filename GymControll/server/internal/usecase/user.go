@@ -44,7 +44,7 @@ func (u *UserUsecase) CreateNewUser(input dto.CreateUserDto) (dto.UserDto, error
 func (u *UserUsecase) FindAllUsers(page, limit int, sort string) ([]dto.UserDto, error) {
 	users, err := u.UserInterface.FindAll(page, limit, sort)
 	if err != nil {
-		return nil, errors.New(fmt.Sprintf(" Error to create User", err))
+		return nil, errors.New(fmt.Sprintf(" Error to Get User", err))
 	}
 	var usersFormated []dto.UserDto
 

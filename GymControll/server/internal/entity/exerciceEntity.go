@@ -10,9 +10,6 @@ type ExerciceEntity struct {
 }
 
 func (u *ExerciceEntity) IsValidExercice() error{
-	if u.ID == ""{
-		return errors.New("ID is required")
-	}
 	if u.Name == ""{
 		return errors.New("Name is required")
 	}
