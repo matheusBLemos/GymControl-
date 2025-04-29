@@ -18,6 +18,7 @@ type ExerciceRepository struct {
 
 func (u *ExerciceRepository) Create(exercice *entity.ExerciceEntity) (*entity.ExerciceEntity, error) {
 	exercice.ID = uuid.New().String()
+	fmt.Println("EXERCICE: ", exercice)
 	stmt, err := u.Db.Prepare("INSERT INTO gym_controll_exercices (id, name, muscle, description, equipament, video, created_user) VALUES ($1, $2, $3, $4, $5, $6, $7)")
 	if err != nil {
 		return nil, err

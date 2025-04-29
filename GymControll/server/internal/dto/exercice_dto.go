@@ -4,7 +4,7 @@ type ExerciceDto struct {
 	Name        string `json:"name"`
 	Muscle      string `json:"muscle"`
 	Description string `json:"description"`
-	Equipament  string `json:"equipament"`
+	Equipament  string `json:"equipment"`
 	Video       string `json:"video_url"`
 }
 
@@ -13,6 +13,6 @@ type ReturnExerciceDto struct {
 	Name        string `json:"name"`
 	Muscle      string `json:"muscle"`
 	Description string `json:"description"`
-	Equipament  string `json:"equipament"`
+	Equipament  string `json:"equipment"`
 	Video       string `json:"video_url"`
 }
