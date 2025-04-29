@@ -21,10 +21,10 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE TABLE gym_controll_users (
-    id VARCHAR(255) PRIMARY KEY,
+    id VARCHAR(255) PRIMARY KEY, 
     name VARCHAR(255) NOT NULL,
     password VARCHAR(255),
-    email VARCHAR(255),
+    email VARCHAR(255) UNIQUE, 
     birthday TIMESTAMPTZ,
     gender VARCHAR(55),
     account_type account_type_enum,
@@ -37,6 +37,9 @@ CREATE TABLE gym_controll_exercices (
     id VARCHAR(255) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     muscle VARCHAR(255) NOT NULL,
+    description VARCHAR(255),
+    equipament VARCHAR(255) NOT NULL,
+    video VARCHAR(255),
     activate INT DEFAULT 0,
     created_user VARCHAR(255),
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),

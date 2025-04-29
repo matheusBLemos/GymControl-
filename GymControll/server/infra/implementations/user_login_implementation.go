@@ -63,7 +63,7 @@ func (u *LoginImplementations) GetUserToken(email, password string) (string, err
 		"exp":     time.Now().Add(24 * time.Hour).Unix(),
 	})
 
-	secret := []byte(configs.Config.DBName)
+	secret := []byte(configs.Config.PassSecret)
 
 	tokenString, err := token.SignedString(secret)
 	if err != nil {

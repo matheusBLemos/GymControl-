@@ -1,4 +1,7 @@
-POST http://localhost:5000/gymcontoll/api/v1/user HTTP/1.1
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hdGhldXMyMDAyaGJsQGhvdG1haWwuY29tIiwiZXhwIjoxNzQ2MDQ2MzA0LCJuYW1lIjoiTWF0aGV1cyBMZW1vcyBVc3VhcmlvIiwidXNlcl9pZCI6ImYzNzUwNTA4LTA4MDgtNDdmZS04MGQ1LWMwNzgyMGRjOTRlYyJ9.A-mZ_YKBnoa273eKrNSd3CR9be91xHlCupCHDo_FNXQ
+
+### Criar usuário
+POST http://localhost:5000/gymcontoll/api/v1/user
 Content-Type: application/json
 
 {
@@ -9,25 +12,32 @@ Content-Type: application/json
   "gender": "M",
   "acountype": "gym_manager"
 }
-###
 
-POST http://localhost:5000/gymcontoll/api/v1/login HTTP/1.1
+###
+### Login (retorna token JWT)
+POST http://localhost:5000/gymcontoll/api/v1/login
 Content-Type: application/json
 
 {
   "email": "matheus2002hbl@hotmail.com",
   "password": "1234"
 }
-###
 
+###
+### Buscar todos os usuários
 GET http://localhost:5000/gymcontoll/api/v1/users
+Authorization: Bearer {{token}}
 
 ###
-GET http://localhost:5000/gymcontoll/api/v1/user/55aa3dfd-a0ca-4b3b-90bf-fa6befb807dc
+### Buscar usuário por ID
+GET http://localhost:5000/gymcontoll/api/v1/user/f3750508-0808-47fe-80d5-c07820dc94ec
+Authorization: Bearer {{token}}
 
 ###
+### Atualizar usuário (completo)
 PUT http://localhost:5000/gymcontoll/api/v1/user/55aa3dfd-a0ca-4b3b-90bf-fa6befb807dc
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "name": "Matheus Atualizado",
@@ -37,13 +47,60 @@ Content-Type: application/json
   "gender": "M",
   "acountype": "default_user"
 }
+
 ###
+### Atualização parcial
 PUT http://localhost:5000/gymcontoll/api/v1/user/55aa3dfd-a0ca-4b3b-90bf-fa6befb807dc
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "acountype": "default_user"
 }
 
 ###
-PUT  http://localhost:5000/gymcontoll/api/v1/deleteuser/55aa3dfd-a0ca-4b3b-90bf-fa6befb807dc
+### Exclusão lógica do usuário
+PUT http://localhost:5000/gymcontoll/api/v1/deleteuser/55aa3dfd-a0ca-4b3b-90bf-fa6befb807dc
+Authorization: Bearer {{token}}
+
+###
+### Criar exercício
+POST http://localhost:5000/gymcontoll/api/v1/exercice
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Agachamento Hack",
+  "muscle": "Pernas",
+  "description": "Exercício composto para membros inferiores",
+  "equipment": "Barra",
+  "video_url": "https://youtu.be/agachamento"
+}
+
+
+### EXERCICIOS
+
+### Buscar todos os exercícios
+GET http://localhost:5000/gymcontoll/api/v1/
+Authorization: Bearer {{token}}
+
+###
+### Buscar exercício por ID
+GET http://localhost:5000/gymcontoll/api/v1/exercice/EXERCICE_ID_AQUI
+Authorization: Bearer {{token}}
+
+###
+### Atualizar exercício
+PUT http://localhost:5000/gymcontoll/api/v1/exercice/EXERCICE_ID_AQUI
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Agachamento Hack",
+  "muscle": "Pernas",
+}
+
+###
+### Excluir exercício
+DELETE http://localhost:5000/gymcontoll/api/v1/exercice/EXERCICE_ID_AQUI
+Authorization: Bearer {{token}}

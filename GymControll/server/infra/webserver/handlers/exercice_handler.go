@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/mathgod152/GymControl/internal/dto"
@@ -9,12 +10,15 @@ import (
 func (_r *Router) CreateExerciceHandler(c *fiber.Ctx) error {
 	var input dto.ExerciceDto
 	userID := c.Locals("user_id")
+	fmt.Println("REQUEST USER: ", userID)
+	fmt.Println("REQUEST USER STRING: ", userID.(string))
 	if userID == nil {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"message": "Usuário não autenticado"})
 	}
 
 	if err := c.BodyParser(&input); err != nil {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"message": "Invalid request"})
+		fmt.Println("ERROR: ", err)
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"message": "Invalid request: "})
 	}
 	exercice, err := _r.Exercice.CreateNewExercice(input, userID.(string))
 	if err != nil {

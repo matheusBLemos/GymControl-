@@ -76,7 +76,7 @@ func (u *UserRepository) FindAll(page, limit int, sort string) ([]*entity.User, 
 }
 
 func (u *UserRepository) FindByID(id string) (*entity.User, error) {
-	query := `SELECT id, name, password, email, birthday, gender, account_type 
+	query := `SELECT id, name, email, birthday, gender, account_type 
 	          FROM gym_controll_users WHERE id = $1 AND activate = 0`
 
 	row := u.Db.QueryRow(query, id)
@@ -85,7 +85,7 @@ func (u *UserRepository) FindByID(id string) (*entity.User, error) {
 	err := row.Scan(&user.Id, &user.Name, &user.Email, &user.Birthday, &user.Gender, &user.AcountType)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, nil 
+			return nil, err 
 		}
 		return nil, err
 	}

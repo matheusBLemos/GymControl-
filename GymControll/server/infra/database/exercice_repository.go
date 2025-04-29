@@ -18,24 +18,27 @@ type ExerciceRepository struct {
 
 func (u *ExerciceRepository) Create(exercice *entity.ExerciceEntity) (*entity.ExerciceEntity, error) {
 	exercice.ID = uuid.New().String()
-	stmt, err := u.Db.Prepare("INSERT INTO gym_controll_exercices (id, name, muscle, created_user) VALUES ($1, $2, $3, $4)")
+	stmt, err := u.Db.Prepare("INSERT INTO gym_controll_exercices (id, name, muscle, description, equipament, video, created_user) VALUES ($1, $2, $3, $4, $5, $6, $7)")
 	if err != nil {
 		return nil, err
 	}
-	_, err = stmt.Exec(exercice.ID, exercice.Name, exercice.Muscle, exercice.CreateUser)
+	_, err = stmt.Exec(exercice.ID, exercice.Name, exercice.Muscle, exercice.Description, exercice.Equipament, exercice.Video, exercice.CreateUser)
 	if err != nil {
 		return nil, err
 	}
 	return &entity.ExerciceEntity{
-		Name:       exercice.Name,
+		Name:        exercice.Name,
 		Muscle:      exercice.Muscle,
-		CreateUser:   exercice.CreateUser,
+		Description: exercice.Description,
+		Equipament:  exercice.Equipament,
+		Video:       exercice.Video,
+		CreateUser:  exercice.CreateUser,
 	}, nil
 }
 
 func (u *ExerciceRepository) FindAll(page, limit int, sort string) ([]*entity.ExerciceEntity, error) {
 	offset := (page - 1) * limit
-	query := fmt.Sprintf(`SELECT id, name, muscle, created_user
+	query := fmt.Sprintf(`SELECT id, name, muscle, description, equipament, video, created_user
 	                      FROM gym_controll_exercices WHERE activate = 0 
 	                      ORDER BY %s 
 	                      LIMIT $1 OFFSET $2`, sort)
@@ -49,7 +52,7 @@ func (u *ExerciceRepository) FindAll(page, limit int, sort string) ([]*entity.Ex
 	var exercices []*entity.ExerciceEntity
 	for rows.Next() {
 		var exercice entity.ExerciceEntity
-		err := rows.Scan(&exercice.ID, &exercice.Name, &exercice.Muscle, &exercice.CreateUser)
+		err := rows.Scan(&exercice.ID, &exercice.Name, &exercice.Muscle, &exercice.Description, &exercice.Equipament, &exercice.Video, &exercice.CreateUser)
 		if err != nil {
 			return nil, err
 		}
@@ -64,16 +67,16 @@ func (u *ExerciceRepository) FindAll(page, limit int, sort string) ([]*entity.Ex
 }
 
 func (u *ExerciceRepository) FindByID(id string) (*entity.ExerciceEntity, error) {
-	query := `SELECT id, name, muscle, created_user 
+	query := `SELECT id, name, muscle, description, equipament, video, created_user 
 	          FROM gym_controll_exercices WHERE id = $1 AND activate = 0`
 
 	row := u.Db.QueryRow(query, id)
 
 	var exercice entity.ExerciceEntity
-	err := row.Scan(&exercice.ID, &exercice.Name, &exercice.Muscle, &exercice.CreateUser)
+	err := row.Scan(&exercice.ID, &exercice.Name, &exercice.Muscle, &exercice.Description, &exercice.Equipament, &exercice.Video, &exercice.CreateUser)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, nil
+			return nil, err
 		}
 		return nil, err
 	}
@@ -83,7 +86,7 @@ func (u *ExerciceRepository) FindByID(id string) (*entity.ExerciceEntity, error)
 
 func (u *ExerciceRepository) Update(exercice *entity.ExerciceEntity) (*entity.ExerciceEntity, error) {
 	if exercice.ID == "" {
-		return nil, errors.New("ID do usuário é obrigatório para atualização")
+		return nil, errors.New("ID do exercicio é obrigatório para atualização")
 	}
 
 	query := "UPDATE gym_controll_exercices SET "
@@ -96,13 +99,28 @@ func (u *ExerciceRepository) Update(exercice *entity.ExerciceEntity) (*entity.Ex
 		i++
 	}
 	if exercice.Muscle != "" {
-		query += "password = $" + strconv.Itoa(i) + ", "
+		query += "muscle = $" + strconv.Itoa(i) + ", "
 		args = append(args, exercice.Muscle)
 		i++
 	}
-	if exercice.CreateUser != "" {
-		query += "account_type = $" + strconv.Itoa(i) + ", "
+	if exercice.Description != "" {
+		query += "description = $" + strconv.Itoa(i) + ", "
 		args = append(args, exercice.CreateUser)
+		i++
+	}
+	if exercice.Equipament != "" {
+		query += "equipament = $" + strconv.Itoa(i) + ", "
+		args = append(args, exercice.Muscle)
+		i++
+	}
+	if exercice.Video != "" {
+		query += "video = $" + strconv.Itoa(i) + ", "
+		args = append(args, exercice.CreateUser)
+		i++
+	}
+	if exercice.CreateUser != "" {
+		query += "created_user = $" + strconv.Itoa(i) + ", "
+		args = append(args, exercice.Muscle)
 		i++
 	}
 

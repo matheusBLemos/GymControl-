@@ -14,9 +14,12 @@ type ExerciceUsecase struct {
 
 func (e *ExerciceUsecase) CreateNewExercice(input dto.ExerciceDto, createUser string) (dto.ExerciceDto, error) {
 	exercice := entity.ExerciceEntity{
-		Name:       input.Name,
-		Muscle:     input.Muscle,
-		CreateUser: createUser,
+		Name:        input.Name,
+		Muscle:      input.Muscle,
+		Description: input.Description,
+		Equipament:  input.Equipament,
+		Video:       input.Video,
+		CreateUser:  createUser,
 	}
 	if err := exercice.IsValidExercice(); err != nil {
 		return dto.ExerciceDto{}, errors.New(fmt.Sprintf(" Error to create Exercice: ", err))
@@ -25,8 +28,11 @@ func (e *ExerciceUsecase) CreateNewExercice(input dto.ExerciceDto, createUser st
 		return dto.ExerciceDto{}, errors.New(fmt.Sprintf("Error to create Exercice", err))
 	}
 	return dto.ExerciceDto{
-		Name:   input.Name,
-		Muscle: input.Muscle,
+		Name:        input.Name,
+		Muscle:      input.Muscle,
+		Description: input.Description,
+		Equipament:  input.Equipament,
+		Video:       input.Video,
 	}, nil
 }
 
@@ -38,9 +44,11 @@ func (e *ExerciceUsecase) FindAllExercices() ([]dto.ReturnExerciceDto, error) {
 	var exerciceFotmated []dto.ReturnExerciceDto
 	for _, entity := range exercice {
 		exerciceFotmated = append(exerciceFotmated, dto.ReturnExerciceDto{
-			Id:     entity.ID,
-			Name:   entity.Name,
-			Muscle: entity.Muscle,
+			Name:        entity.Name,
+			Muscle:      entity.Muscle,
+			Description: entity.Description,
+			Equipament:  entity.Equipament,
+			Video:       entity.Video,
 		})
 	}
 	return exerciceFotmated, nil
@@ -52,17 +60,22 @@ func (e *ExerciceUsecase) FindExerciceById(exerciceId string) (dto.ReturnExercic
 		return dto.ReturnExerciceDto{}, errors.New(fmt.Sprintf(" Error to Get Exercices", err))
 	}
 	return dto.ReturnExerciceDto{
-		Id:     exercice.ID,
-		Name:   exercice.Name,
-		Muscle: exercice.Muscle,
+		Name:        exercice.Name,
+		Muscle:      exercice.Muscle,
+		Description: exercice.Description,
+		Equipament:  exercice.Equipament,
+		Video:       exercice.Video,
 	}, nil
 }
 
 func (e *ExerciceUsecase) UpdateeExercice(input dto.ExerciceDto, createUser string) (dto.ExerciceDto, error) {
 	exercice := entity.ExerciceEntity{
-		Name:       input.Name,
-		Muscle:     input.Muscle,
-		CreateUser: createUser,
+		Name:        input.Name,
+		Muscle:      input.Muscle,
+		Description: input.Description,
+		Equipament:  input.Equipament,
+		Video:       input.Video,
+		CreateUser:  createUser,
 	}
 	if _, err := e.ExerciceInterface.Update(&exercice); err != nil {
 		return dto.ExerciceDto{}, errors.New(fmt.Sprintf("Error to update Exercice", err))
