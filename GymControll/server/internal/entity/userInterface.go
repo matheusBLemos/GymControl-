@@ -8,10 +8,3 @@ type UserInterface interface {
 	Update(user *User) (*User, error)
 	Delete(id string) (bool, error)
 }
-
-
-type UserPersonalInterface interface {
-	Relationate(userEmail, personalEmail string) (*User, error)
-	FindUserByTrainer(personalId string) ([]*User, error)
-	FindTrainerByUser(userId string) ([]*User, error)
-}
