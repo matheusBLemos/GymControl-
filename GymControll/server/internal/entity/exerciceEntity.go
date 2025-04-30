@@ -12,15 +12,15 @@ type ExerciceEntity struct {
 	CreateUser  string
 }
 
-func (u *ExerciceEntity) IsValidExercice() error {
-	if u.Name == "" {
+func (e *ExerciceEntity) IsValidExercice() error {
+	if e.Name == "" {
 		return errors.New("Name is required")
 	}
-	if u.Muscle == "" {
+	if e.Muscle == "" {
 		return errors.New("Muscle is required")
 	}
-	if u.CreateUser == "" {
-		return errors.New("Email Obrigatorio")
+	if e.CreateUser == "" {
+		return errors.New("Email is required")
 	}
 	return nil
 }
