@@ -15,10 +15,10 @@ type WorkoutSectionEntity struct {
 	Id          string
 	Name        string
 	Description string
-	ExerciceSet []ExerciseSetEntity
+	ExercicesSet []ExerciseSetEntity
 }
 
-func (e *ExerciseSetEntity) ExerciseSet() error {
+func (e *ExerciseSetEntity) IsValidExerciseSet() error {
 	if e.WorkoutSectionId == "" {
 		return errors.New("Name is required")
 	}
