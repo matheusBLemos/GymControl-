@@ -1,8 +1,8 @@
 package entity
 
 type PersonalInteractorInterface interface {
-	Relationate(userEmail, personalEmail string) (*User, error)
-	FindUserByTrainer(personalId string) ([]*User, error)
-	FindTrainerByUser(userId string) ([]*User, error)
-	SetWorkoutSectionToCustumer(workoutSectionId, userId string)(bool)
+	IsTrainer(userId string) (bool, error)
+	AssociateUserWithTrainer(userEmail, personalEmail string) error
+	FindUsersByTrainer(personalEmail string) ([]*User, error)
+	FindTrainersByUser(userId string) ([]*User, error)
 }
