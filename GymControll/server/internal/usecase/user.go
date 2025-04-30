@@ -9,8 +9,7 @@ import (
 )
 
 type UserUsecase struct {
-	UserInterface         entity.UserInterface
-	UserPersonalInterface entity.UserPersonalInterface
+	UserInterface entity.UserInterface
 }
 
 func (u *UserUsecase) CreateNewUser(input dto.CreateUserDto) (dto.UserDto, error) {
@@ -63,7 +62,7 @@ func (u *UserUsecase) FindAllUsers(page, limit int, sort string) ([]dto.UserDto,
 func (u *UserUsecase) FindUserById(userId string) (dto.UserDto, error) {
 	users, err := u.UserInterface.FindByID(userId)
 	if err != nil {
-		return dto.UserDto{}, errors.New(fmt.Sprintf(" Error to Select User:  ",userId, err))
+		return dto.UserDto{}, errors.New(fmt.Sprintf(" Error to Select User:  ", userId, err))
 	}
 	return dto.UserDto{
 		Name:       users.Name,

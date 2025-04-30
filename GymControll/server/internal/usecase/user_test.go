@@ -17,15 +17,15 @@ type mockUserInterface struct {
 	CreateErr error
 }
 
-func newMockUserInterface() *mockUserInterface {
-	return &mockUserInterface{
-		Users: []*entity.User{
-			{Id: "id1", Name: "João", Email: "joao@example.com"},
-			{Id: "id2", Name: "Maria", Email: "maria@example.com"},
-			{Id: "id3", Name: "Carlos", Email: "carlos@example.com"},
-		},
-	}
-}
+// func newMockUserInterface() *mockUserInterface {
+// 	return &mockUserInterface{
+// 		Users: []*entity.User{
+// 			{Id: "id1", Name: "João", Email: "joao@example.com"},
+// 			{Id: "id2", Name: "Maria", Email: "maria@example.com"},
+// 			{Id: "id3", Name: "Carlos", Email: "carlos@example.com"},
+// 		},
+// 	}
+// }
 
 
 func (m *mockUserInterface) CryptoPassword(password string) (string, error) {
@@ -135,7 +135,7 @@ func FuzzCreateNewUser(f *testing.F) {
 			UserInterface: &mockUserInterface{
 				PasswordHash: "hashedPassword",
 			},
-			UserPersonalInterface: &mockUserPersonalInterface{},
+			// UserPersonalInterface: &mockUserPersonalInterface{},
 		}
 
 		dtoInput := dto.CreateUserDto{
