@@ -46,3 +46,14 @@ CREATE TABLE gym_controll_exercices (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     CONSTRAINT fk_created_user FOREIGN KEY (created_user) REFERENCES gym_controll_users(id)
 );
+
+CREATE TABLE relationate_personal_custumer (
+    id VARCHAR(255) PRIMARY KEY,
+    personal_email VARCHAR(255) NOT NULL,
+    custumer_email VARCHAR(255) NOT NULL,
+    activate INT DEFAULT 0,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    CONSTRAINT fk_personal_email FOREIGN KEY (personal_email) REFERENCES gym_controll_users(email),
+    CONSTRAINT fk_custumer_email FOREIGN KEY (custumer_email) REFERENCES gym_controll_users(email)
+);
